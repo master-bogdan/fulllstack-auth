@@ -8,8 +8,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "client": "cd ../ && cd client && yarn start",
-    "fulldev": "concurrently -n 'server,client' -c 'yellow,blue' \"yarn run dev\" \"yarn run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "fulldev": "concurrently -n 'server,client' -c 'yellow,blue' \"yarn run dev\" \"yarn run client\""
   },
   "type" : "module",
   "keywords": [

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from 'contexts/UserContext';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import {
   Form,
   Input,
   Button,
+  Alert,
 } from 'antd';
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
 const tailLayout = {
   wrapperCol: {
@@ -15,6 +22,7 @@ const tailLayout = {
 };
 
 const Login = () => {
+  const { setUser } = useContext(UserContext);
   const [form] = Form.useForm();
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -25,13 +33,13 @@ const Login = () => {
 
       if (data.success) {
         localStorage.setItem('user-auth', JSON.stringify({ auth: true, name: data.username }));
+        setUser({ auth: true, name: data.username });
         history.push('/');
       }
     } catch (error) {
       console.log(error.response.data);
       setErrorMessage(error.response.data.error);
     }
-    // console.log('Success:', values);
   };
 
   const onFill = () => {
@@ -43,6 +51,7 @@ const Login = () => {
 
   return (
     <Form
+      {...layout}
       form={form}
       name="login"
       initialValues={{
@@ -50,6 +59,12 @@ const Login = () => {
       }}
       onFinish={onFinish}
     >
+      {errorMessage && (
+        <Form.Item {...tailLayout}>
+          <Alert message={errorMessage} type="error" showIcon />
+        </Form.Item>
+      )}
+
       <Form.Item
         label="Email"
         name="email"
@@ -67,7 +82,6 @@ const Login = () => {
       <Form.Item
         label="Password"
         name="password"
-        help={errorMessage}
         rules={[
           {
             required: true,
@@ -79,10 +93,12 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button block type="primary" htmlType="submit">
           Submit
         </Button>
-        <Button type="link" htmlType="button" onClick={onFill}>
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button block type="link" htmlType="button" onClick={onFill}>
           Fill test login
         </Button>
       </Form.Item>

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from 'contexts/UserContext';
+import { Button, Typography, Space } from 'antd';
 
-const User = ({ username }) => {
+const { Title, Text } = Typography;
+
+const User = () => {
   const history = useHistory();
+  const { user } = useContext(UserContext);
 
   const logOut = () => {
     localStorage.setItem('user-auth', false);
@@ -11,10 +16,16 @@ const User = ({ username }) => {
 
   return (
     <div>
-      Hello {username}
-      <button onClick={logOut} type="button">
+      <Title style={{ textAlign: 'center' }} level={2}>
+        <Text>Hello</Text>
+        <br />
+        <Text type="success">
+          {user.name}
+        </Text>
+      </Title>
+      <Button onClick={logOut} type="primary" block>
         Logout
-      </button>
+      </Button>
     </div>
   );
 };

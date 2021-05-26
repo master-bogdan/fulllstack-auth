@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import {
   Switch,
   Route,
-  useHistory,
 } from 'react-router-dom';
 import Login from 'pages/Login';
 import User from 'pages/User';
@@ -15,10 +14,10 @@ const layoutStyles = {
   alignItems: 'center',
 };
 
-const Routes = ({ username }) => (
+const Routes = () => (
   <Layout style={layoutStyles}>
     <Switch>
-      <Route exact path="/" render={() => <User username={username} />} />
+      <Route exact path="/" component={User} />
       <Route path="/login" component={Login} />
     </Switch>
   </Layout>
