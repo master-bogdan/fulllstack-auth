@@ -1,4 +1,4 @@
-# Simple Auth Fullstack (React + NodeJS) app [DEMO](https://fullstack-auth.herokuapp.com/)  
+# :lock: Simple Auth Fullstack (React + NodeJS) app [DEMO](https://fullstack-auth.herokuapp.com/)  
 Simple Authentication app with backend on nodejs (express). Login and logout functions and checking if user allready login
 ## Used Techologies  
 ### Backend
